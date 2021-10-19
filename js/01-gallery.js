@@ -45,22 +45,37 @@ function modalOpen(e) {
     height = '800'
     />
        </div> `,
+    {
+      onShow: instance => {
+        instance.element().querySelector('IMG').onclick = instance.close;
+        window.addEventListener('keydown', eventHandler);
+      },
+      onClose: instance => {
+        window.removeEventListener('keydown', eventHandler);
+      },
+    },
   );
-  instance.show();
-
-  const imageElement = instance.element('.modal');
-  imageElement.addEventListener('click', modalClose);
-  window.addEventListener('keydown', modalClose);
-
-  function modalClose(e) {
-    if (
-      e.target.nodeName === 'IMG' ||
-      e.code === 'Escape' ||
-      e.currentTarget.nodeName === 'DIV'
-    ) {
+  function eventHandler(e) {
+    if (e.key === 'Escape') {
       instance.close();
-      imageElement.removeEventListener('click', modalClose);
-      window.removeEventListener('keydown', modalClose);
+      return;
     }
   }
+  instance.show();
 }
+
+// const imageElement = instance.element('.modal');
+// imageElement.addEventListener('click', modalClose);
+// window.addEventListener('keydown', modalClose);
+
+// function modalClose(e) {
+//   if (
+//     e.target.nodeName === 'IMG' ||
+//     e.code === 'Escape' ||
+//     e.currentTarget.nodeName === 'DIV'
+//   ) {
+//     instance.close();
+//     imageElement.removeEventListener('click', modalClose);
+//     window.removeEventListener('keydown', modalClose);
+//   }
+// }
