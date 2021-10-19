@@ -42,6 +42,7 @@ function modalOpen(e) {
     <img src = ${e.target.dataset.source}
     alt=${e.target.alt}
     width = '1140'
+    height = '800'
     />
        </div> `,
   );
